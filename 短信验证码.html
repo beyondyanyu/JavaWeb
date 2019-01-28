@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	window.onload = function(){
+	
+	}
+	
+	
+	function changeimg(obj){
+		obj.src = "/WEB14/checkimg?time=" + new Date().getTime();//这里的地址要跟上一个不一致，才会更新变换，因为有缓冲区的存在		
+	}
+	
+	
+</script>
+</head>
+<body>
+	<form action="/WEB13/login" method="post">
+		用户名：<input type="text" name="username"> <br/>
+		密码：<input type="password" name="password"> <br/>
+		验证码：<input type="text" name="username"><img onclick="changeimg(this)" src="/WEB14/checkimg"> <br/>
+		
+		<input type="submit" value="登录"><br/>
+	
+	</form>
+</body>
+</html>
