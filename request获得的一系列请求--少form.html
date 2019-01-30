@@ -1,5 +1,6 @@
 //在WEB15项目下创建一个com.itheima.line包
 //包下有个LineServlet类
+//web.xml中的url为line
 //代码如下：
 
 
@@ -19,22 +20,22 @@ public class LineServlet extends HttpServlet {
 		
 		//1.获得请求方式request
 		String method = request.getMethod();//这里是post方式请求
-		System.out.println("method:"+method);//post
+		System.out.println("method:"+method);//method: POST
 		
 		
 		//2.获得请求的资源相关的内容
 		String requestURI = request.getRequestURI();
 		StringBuffer requestURL = request.getRequestURL();
-		System.out.println("uri:" + requestURI);
-		System.out.println("url:" + requestURL);
+		System.out.println("uri:" + requestURI);//uri:/WEB15/line
+		System.out.println("url:" + requestURL);//url:http://localhost:8080/WEB15/line
 		
 		//获得web应用的名称
 		String contextPath = request.getContextPath();
-		System.out.println("web应用名称：" + contextPath);
+		System.out.println("web应用名称：" + contextPath);//web应用名称：/WEB15
 		
 		//获得地址后的参数的字符串
 		String queryString = request.getQueryString();
-		System.out.println(queryString);
+		System.out.println(queryString);//null
 		
 		
 	}
