@@ -4,6 +4,9 @@
 //代码如下：
 
 
+//web.xml中的url为line
+
+
 package com.itheima.line;
 
 import java.io.IOException;
@@ -19,8 +22,8 @@ public class LineServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//1.获得请求方式request
-		String method = request.getMethod();//这里是post方式请求
-		System.out.println("method:"+method);//method: POST
+		String method = request.getMethod();//这里是get方式请求
+		System.out.println("method:"+method);//method: get
 		
 		
 		//2.获得请求的资源相关的内容
@@ -35,7 +38,8 @@ public class LineServlet extends HttpServlet {
 		
 		//获得地址后的参数的字符串
 		String queryString = request.getQueryString();
-		System.out.println(queryString);//null
+		System.out.println(queryString);//username=beyondyanyu&password=beyond19981014wsq
+		//若是post请求，请求参数不在请求行，而是在请求体当中，则输出null
 		
 		
 	}
