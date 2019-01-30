@@ -1,0 +1,45 @@
+//在WEB15项目下创建一个com.itheima.line包
+//包下有个LineServlet类
+//代码如下：
+
+
+package com.itheima.line;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
+
+public class LineServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//1.获得请求方式request
+		String method = request.getMethod();//这里是post方式请求
+		System.out.println("method:"+method);//post
+		
+		
+		//2.获得请求的资源相关的内容
+		String requestURI = request.getRequestURI();
+		StringBuffer requestURL = request.getRequestURL();
+		System.out.println("uri:" + requestURI);
+		System.out.println("url:" + requestURL);
+		
+		//获得web应用的名称
+		String contextPath = request.getContextPath();
+		System.out.println("web应用名称：" + contextPath);
+		
+		//获得地址后的参数的字符串
+		String queryString = request.getQueryString();
+		System.out.println(queryString);
+		
+		
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
