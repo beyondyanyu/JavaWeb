@@ -1,0 +1,28 @@
+//header
+package com.itheima.header;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class RefererServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//对该新闻的来源进行判断
+		String header = request.getHeader("referer");
+		if(header != null && header.startsWith("http://localhost")){//网站开始为http://localhost  即我的网站
+			//是从我自己的网站跳转过去的，可以看新闻
+			response.setContentType("text/html;charset = UTF-8");
+			response.getWriter().write("原谅我这一生不羁放纵爱自由....");}
+		else{
+			response.getWriter().write("你是盗链者，可耻！呸");
+		}
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
