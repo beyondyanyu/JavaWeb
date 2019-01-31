@@ -1,0 +1,33 @@
+package com.itheima.header;
+
+import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class Header extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		//1.获得指定的请求头
+		String header = request.getHeader("User-Agent");
+		System.out.println(header);//Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0
+		
+		//2.获得所有请求头的名称
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while(headerNames.hasMoreElements()){
+			String headerName = headerNames.nextElement();
+			String headerValue = request.getHeader(headerName);
+			
+			System.out.println(headerName + ":" + headerValue);
+		}
+		
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
