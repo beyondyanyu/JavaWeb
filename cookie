@@ -1,0 +1,38 @@
+package com.itheima.cookie;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class SendCookieServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		//1.创建cookie对象
+		Cookie cookie = new Cookie("name","beyond");
+		
+		//为cookie设置持久时间----也就是cookie在硬盘中保持的时间
+		cookie.setMaxAge(60*10);//单位是秒second。10分钟
+		//若要删除该cookie，只需要将时间设置成0即可
+		
+		//为cookie设置一个携带的路径
+		cookie.setPath("/WEB16/sendCookie");//一般写客户端地址。当访问sendCookie这个资源的时候，才携带这个cookie
+		
+		//cookie.setPath("/WEB16");//当访问WEB16下的任何资源时，都携带这个cookie
+		//cookie.setPath("/");//访问服务器下的所有资源都携带这个cookie
+		//如果不设置携带路径，那么该cookie信息会在访问产生该cookie的	web资源所在的路径都携带cookie信息  也就是说，例如这个资源是 http://localhost:8080/WEB16/sendCookie，即只要是http://localhost:8080/WEB16/ 该地址，都会携带这个cookie的	
+		
+		
+		//2.将cookie中存储的信息以响应头的形式发送给客户端
+		response.addCookie(cookie);
+		
+		
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
