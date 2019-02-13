@@ -80,9 +80,9 @@
 	${1+1}<!-- 2 -->
 	${1==1?false:true}<!-- false -->
 	
-	<!-- empty 判定某个对象是否是null  如果是null返回true；不是返回false -->
-	${empty list}<!-- 不为null，返回false -->
-	${empty user}<!-- 不为null，返回false -->
+	<!-- empty 判定某个对象是否是 null  如果是 null返回 true；不是返回 false -->
+	${empty list}<!-- 不为 null，返回 false -->
+	${empty user}<!-- 不为 null，返回 false -->
 		
 	
 </body>
