@@ -12,6 +12,9 @@
 <body>
 	<!-- 模拟域中的数据 -->
 	<%
+		pageContext.setAttribute("company","ScriptKiddie" );
+	
+	
 		//存储一个字符串
 		request.setAttribute("company","beyond谚语" );
 		
@@ -64,5 +67,14 @@
 	
 	<!-- 使用EL表达式获得 application域中的第二个元素的name（yanyu） -->
 	${applicationScope.list[1].name}
+	
+	<hr> 
+	
+	<!-- 使用el表达式 全域查找  也就是把域给去掉即可-->
+	${company}
+	${user.name}
+	${list[1].name}
+	
+	
 </body>
 </html>
