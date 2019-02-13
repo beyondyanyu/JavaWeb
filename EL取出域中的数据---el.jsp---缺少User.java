@@ -76,5 +76,14 @@
 	${list[1].name}
 	
 	
+	<!-- el可执行表达式的运算 -->
+	${1+1}<!-- 2 -->
+	${1==1?false:true}<!-- false -->
+	
+	<!-- empty 判定某个对象是否是null  如果是null返回true；不是返回false -->
+	${empty list}<!-- 不为null，返回false -->
+	${empty user}<!-- 不为null，返回false -->
+		
+	
 </body>
 </html>
