@@ -1,0 +1,52 @@
+package beyond.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class JDBCDemo {
+	public static void main(String[] args) {
+		
+		//通过jdbc去控制事务
+		Connection conn = null;
+		
+		
+		try {
+			//1,注册驱动	
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			//2,获得connection
+			conn = DriverManager.getConnection("jdbc:mysql:///web19","root","wsq");//三个///代表本地一个端口
+
+			//手动开启事务
+			conn.setAutoCommit(false);//是否自动提交false，代表不自动提交也就是手动提交
+			
+			
+			//3，获得操作数据库对象(执行平台)
+			Statement stmt = conn.createStatement();
+			
+			//4,操作sql
+			//stmt.executeUpdate("insert into account values(null,'zhangsan',3000)");
+			int executeUpdate = stmt.executeUpdate("update account set money=5000 where name='sq'");
+			
+			
+			//提交事务
+			conn.commit();
+			
+			
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		
+		
+	
+	}
+}
