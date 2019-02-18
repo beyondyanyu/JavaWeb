@@ -1,0 +1,28 @@
+package beyondwsq.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.activation.DataSource;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.taglibs.standard.tag.common.sql.DataSourceUtil;
+
+import beyondwsq.domain.Product;
+import beyondwsq.utils.DataSourceUtils;
+
+public class AdminProductDao {
+
+	//进行数据库访问,
+	public List<Product> findAllProduct() throws SQLException {
+		
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());//不需要事务控制直接传参
+		String sql = "select *from product";//进行sql访问
+		List<Product> productList = runner.query(sql, new BeanListHandler<Product>(Product.class));//查询Query方法
+				
+		
+		return productList;//抛给service
+	}
+
+}
