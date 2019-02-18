@@ -1,0 +1,19 @@
+package beyondwsq.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import beyondwsq.dao.AdminProductDao;
+import beyondwsq.domain.Product;
+
+public class AdminProductService {
+
+	//查询所有的商品
+	public List<Product> findAllProduct() throws SQLException {
+
+		//因为没事啥复杂业务，所以直接传递请求到dao层
+		AdminProductDao dao = new AdminProductDao();
+		return dao.findAllProduct();//需要事务控制，抛到service层，不需要事务控制直接抛到web层
+	}
+
+}
