@@ -1,0 +1,31 @@
+package beyondwsq.domain;
+
+public class Category {
+	
+	/*CREATE TABLE `category` (
+		  `cid` varchar(32) NOT NULL,
+		  `cname` varchar(20) DEFAULT NULL,
+	  	  PRIMARY KEY (`cid`)
+	);
+	INSERT INTO `category` VALUES ('1','手机数码'),('2','运动户外'),('3','电脑办公'),('4','家具家居'),('5','鞋靴箱包'),('6','图书音像'),('7','母婴孕婴'),('8','汽车用品');
+
+			
+			
+	*/
+	
+	
+	private String cid;
+	private String cname;
+	public String getCid() {
+		return cid;
+	}
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	} 
+}
