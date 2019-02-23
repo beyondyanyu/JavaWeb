@@ -9,6 +9,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.taglibs.standard.tag.common.sql.DataSourceUtil;
 
+import beyondwsq.domain.Category;
 import beyondwsq.domain.Product;
 import beyondwsq.utils.DataSourceUtils;
 
@@ -23,6 +24,25 @@ public class AdminProductDao {
 				
 		
 		return productList;//抛给service
+	}
+
+	public List<Category> findAllCategory() throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());//不需要事务控制直接传参
+		String sql = "select *from category";//进行sql访问
+		List<Category> categoryList = runner.query(sql, new BeanListHandler<Category>(Category.class));//查询Query方法
+		return categoryList;
+	}
+
+	
+	public void addProduct(Product product) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());//不需要事务控制直接传参
+		String sql ="insert into product values(?,?,?,?,?,?,?,?,?,?)";
+		runner.update(sql,product.getPid(),product.getPname(),
+				product.getMarket_price(),product.getShop_price(),
+				product.getPimage(),product.getPdate(),product.getIs_hot(),
+				product.getPdesc(),product.getPflag(),product.getCid());
+		//session.save(product);//将数据保存到数据库中去
+		
 	}
 
 }
