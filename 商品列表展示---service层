@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import beyondwsq.dao.AdminProductDao;
+import beyondwsq.domain.Category;
 import beyondwsq.domain.Product;
 
 public class AdminProductService {
@@ -14,6 +15,19 @@ public class AdminProductService {
 		//因为没事啥复杂业务，所以直接传递请求到dao层
 		AdminProductDao dao = new AdminProductDao();
 		return dao.findAllProduct();//需要事务控制，抛到service层，不需要事务控制直接抛到web层
+	}
+
+	//获得所有的类别
+	public List<Category> findAllCategory() throws SQLException {
+		AdminProductDao dao = new AdminProductDao();
+		return dao.findAllCategory();//使用dao调用find方法（也叫开启事务）
+		
+	}
+
+	//添加商品数据
+	public void addProduct(Product product) throws SQLException {
+		AdminProductDao dao = new AdminProductDao();
+		dao.addProduct(product);
 	}
 
 }
