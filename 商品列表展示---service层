@@ -30,4 +30,11 @@ public class AdminProductService {
 		dao.addProduct(product);
 	}
 
+	//根据pid删除商品数据
+	public void delProductByPid(String pid) throws SQLException {
+		AdminProductDao dao = new AdminProductDao();
+		dao.delProductByPid(pid);
+		
+	}
+
 }
