@@ -41,8 +41,12 @@ public class AdminProductDao {
 				product.getMarket_price(),product.getShop_price(),
 				product.getPimage(),product.getPdate(),product.getIs_hot(),
 				product.getPdesc(),product.getPflag(),product.getCid());
-		//session.save(product);//将数据保存到数据库中去
-		
 	}
 
+	public void delProductByPid(String pid) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());//不需要事务控制直接传参
+		String sql = "delete from product where pid=?";
+		runner.update(sql, pid);
+		
+	}
 }
