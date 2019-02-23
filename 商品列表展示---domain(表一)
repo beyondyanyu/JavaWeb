@@ -2,7 +2,8 @@ package beyondwsq.domain;
 
 public class Product {
 	
-	/*`pid` varchar(32) NOT NULL,
+	/*
+	  `pid` varchar(50) NOT NULL,
 	  `pname` varchar(50) DEFAULT NULL,
 	  `market_price` double DEFAULT NULL,
 	  `shop_price` double DEFAULT NULL,
