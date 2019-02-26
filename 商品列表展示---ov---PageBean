@@ -62,9 +62,4 @@ public class PageBean<T> {
 		this.productList = productList;
 	}
 	
-	
-	
-
-
-	
 }
