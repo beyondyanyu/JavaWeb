@@ -1,0 +1,53 @@
+package beyondwsq.web;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import beyondwsq.domain.Product;
+import beyondwsq.service.ProductService;
+import beyondwsq.vo.PageBean;
+
+public class ProductListServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//获得全部的商品列表
+		ProductService service = new ProductService();//将请求传递给service层
+		
+		//模拟当前是第一页
+		String currentPageStr = request.getParameter("currentPage");
+		if(currentPageStr==null) currentPageStr = "1";
+		
+		int currentPage = Integer.parseInt(currentPageStr);
+		//认为每页显示12条
+		int currentCount = 12;
+		
+		
+		
+		
+		
+		
+		PageBean<Product> pageBean  = null;
+		try { 
+			pageBean = service.findPageBean(currentPage,currentCount);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//封装好对象到request域当中
+		request.setAttribute("pageBean", pageBean);//当前是多少页
+
+		//转发指定跳转页面
+		request.getRequestDispatcher("/product_list.jsp").forward(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
