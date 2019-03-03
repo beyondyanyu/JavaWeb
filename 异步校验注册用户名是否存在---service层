@@ -1,0 +1,18 @@
+package beyondwsq.service;
+
+import java.sql.SQLException;
+
+import beyondwsq.dao.UserDao;
+
+public class UserService {
+
+	public boolean checkUsername(String username) throws SQLException {
+		
+		UserDao dao = new UserDao();
+		Long isExist = dao.checkUsername(username);//传递username到dao层
+		
+		
+		return isExist>0?true:false;
+	}
+
+}
