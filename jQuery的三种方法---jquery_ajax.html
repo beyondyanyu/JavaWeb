@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+
+	
+<script type="text/javascript">
+	function fn1(){
+		//get异步访问服务器
+		//jQuery.get(url, [data], [callback], [type])  type为返回的类型 可有可无    这里  $ 跟 jQuery 是等价的  
+		$.get(
+			"/WEB22/ajaxServlet2",//url
+			{"name":"琪宝","age":19}, //发送请求的参数
+			function(data){//执行成功后的回调函数  这里的data就下面的json格式
+				//{"name":"yy","age":19}
+				alert(data.name);//弹出 yy 窗口
+			},
+			"json"
+		);
+		
+	}	
+	
+	function fn2(){
+		//post异步访问服务器
+		//jQuery.get(url, [data], [callback], [type])  type为返回的类型 可有可无    这里  $ 跟 jQuery 是等价的  
+		$.post(
+			"/WEB22/ajaxServlet2",//url
+			{"name":"思琪","age":20}, //发送请求的参数
+			function(data){//执行成功后的回调函数  这里的data就下面的json格式
+				//{"name":"yy","age":19}
+				alert(data.name);//弹出 yy 窗口
+			},
+			"json"
+		);
+	}
+
+	
+	
+	function fn3(){
+		//ajax异步访问服务器
+		//jQuery.get(url, [data], [callback], [type])  type为返回的类型 可有可无    这里  $ 跟 jQuery 是等价的  
+		
+		$.ajax({//都是键值对的形式存在
+			url:"/WEB22/ajaxServlet2",//(默认: 当前页地址) 发送请求的地址。
+			asynic:true,//(默认: true) 默认设置下，所有请求均为异步请求。
+			type:"post",//提交方式
+			data:{"name":"siqi","age":18},//发送到服务器的数据  
+			success:function(data){//接收客户端返回的数据要加 data   请求成功后的回调函数。
+				alert(data.name);			
+			},
+			error:function(){//(默认: 自动判断 (xml 或 html)) 请求失败时调用此函数。
+				alert("请求失败");
+			},
+			dataType:"json"//返回值的类型
+			
+		});
+	}
+</script>
+
+
+</head>
+<body>
+	<input type="button" value="get异步访问服务器" onclick="fn1()"><span id="span1"></span>
+	</br>
+	<input type="button" value="post异步访问服务器" onclick="fn2()"><span id="span2"></span>
+	</br>
+	<input type="button" value="ajax异步访问服务器" onclick="fn3()"><span id="span3"></span>
+	</br>
+</body>
+</html>
