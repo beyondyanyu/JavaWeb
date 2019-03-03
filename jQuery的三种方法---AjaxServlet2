@@ -1,0 +1,30 @@
+package beyondwsq.ajax02;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class AjaxServlet2 extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//request.setCharacterEncoding("UTF-8");
+		
+		//获得请求参数name和age
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		
+		System.out.println(name + "        " + age);
+		
+		
+		response.setContentType("text/htme;charset=UTF-8");
+		response.getWriter().write("{\"name\":\"琪宝\",\"age\":19}");//  通过转译字符  \ 进行转译 "
+		
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
