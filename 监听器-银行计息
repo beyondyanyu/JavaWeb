@@ -1,0 +1,43 @@
+package beyond.create;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.SimpleFormatter;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class MyServletContextListener implements ServletContextListener {
+
+	
+	public void contextInitialized(ServletContextEvent sce) {
+		Timer timer = new Timer();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String currentTime = "2019-04-29 20:40:00";//当前时间
+		Date parse = null;
+		try {
+			parse = format.parse(currentTime);//解析字符串
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		timer.scheduleAtFixedRate(new TimerTask() {
+			
+			@Override
+			public void run() {
+				System.out.println("喜欢你");
+				
+			}
+		}, parse, 24*60*60*1000);//单位：ms
+		
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		// TODO Auto-generated method stub
+		
+	}
+}
