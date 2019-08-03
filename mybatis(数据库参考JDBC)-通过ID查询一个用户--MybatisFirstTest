@@ -1,0 +1,38 @@
+package com.pdsu.mybatis.junit;
+
+import java.io.InputStream;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Test;
+
+import com.pdsu.mybatis.pojo.User;
+
+public class MybatisFirstTest {
+	
+	@Test
+	public void testMybatis() throws Exception {
+		//加载核心配置文件，加载要使用IO流进行读取
+		String resource = "sqlMapConfig.xml";
+		InputStream in = Resources.getResourceAsStream(resource);
+		
+		//创建SqlSessionFactory
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+		//SqlSessionFactoryBuilder这是一个实现类需要new一下
+		
+		//创建SQLSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//执行sql语句
+		User User = sqlSession.selectOne("user.findUserById", 10);
+		/*
+		这里的user是与sqlmap文件夹里面的User.xml的namespace一致
+		findUserById是与sqlmap文件夹里面的User.xml的id一致
+		*/
+		
+		
+		System.out.println(User);
+	}
+}
