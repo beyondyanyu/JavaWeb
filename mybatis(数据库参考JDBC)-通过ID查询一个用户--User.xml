@@ -9,8 +9,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 -->
 
 <mapper namespace="user">
+	
+	<!-- 
+	resultType:返回值
+	parameterType:输入参数 
+	-->
+	
+	
 	<!-- 通过ID查询一个用户 -->
 	<select id="findUserById" parameterType="Integer" resultType="com.pdsu.mybatis.pojo.User">
 		select * from user where id= #{sq}
 	</select>
+	
+	<!-- 
+	#{} === select * from user where username=     表示占位符？   sq可以随意替代
+		=== select * from user where username= '思琪'
+	
+	${} === select * from user where username like '%${value}%'  表示字符串拼接  value不可以随意替代
+		
+		=== select * from user where username like '%琪%' 			sql 模糊语句查询
+		=== select * from user where username like "%"'琪%'"%" 		sql 模糊语句查询
+		
+		=== select * from user where username like "%"#{sq}"%" 
+	-->
+	
+	
+	<!-- 根据用户名称模糊查询用户列表 -->
+	<select id="findUserByUsername" parameterType="String" resultType="com.pdsu.mybatis.pojo.User">
+		select * from user where username like '%${value}%'
+	</select>
+	
+	
+	
 </mapper>
