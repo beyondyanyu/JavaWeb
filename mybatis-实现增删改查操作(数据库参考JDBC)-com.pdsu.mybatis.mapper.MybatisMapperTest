@@ -1,0 +1,34 @@
+package com.pdsu.mybatis.mapper;
+
+import java.io.InputStream;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Test;
+
+import com.pdsu.mybatis.pojo.User;
+
+public class MybatisMapperTest {
+	@Test
+	public void testMapper() throws Exception {
+		//加载核心配置文件，加载要使用IO流进行读取
+		String resource = "sqlMapConfig.xml";
+		InputStream in = Resources.getResourceAsStream(resource);
+		
+		//创建SqlSessionFactory
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+		//SqlSessionFactoryBuilder这是一个实现类需要new一下
+		
+		//创建SQLSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();	
+		
+		//SqlSession自动生成实现类（接口需要遵循四大原则）=== UserMapper.class为遵循四大原则的接口
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		User user = userMapper.findUserById(30);
+		System.out.println(user);
+	
+	}
+}
