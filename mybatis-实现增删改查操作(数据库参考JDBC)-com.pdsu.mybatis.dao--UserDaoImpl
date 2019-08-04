@@ -1,0 +1,38 @@
+package com.pdsu.mybatis.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.pdsu.mybatis.pojo.User;
+
+/**
+ * 实现类
+ * */
+public class UserDaoImpl implements UserDao {
+	//注入SQLSession工厂
+	private SqlSessionFactory sqlsessionFactory;
+
+	//构造器
+	public UserDaoImpl(SqlSessionFactory sqlsessionFactory) {
+		this.sqlsessionFactory = sqlsessionFactory;
+	}
+	
+	//通过用户ID查询一个用户
+	public User selectUserById(Integer id){
+		SqlSession sqlSession = sqlsessionFactory.openSession(); 
+		return sqlSession.selectOne("user.findUserById", id);
+	}
+	
+	//通过用户名称查询一个用户
+	public List <User> selectUserByUsername(User username){
+		SqlSession sqlSession = sqlsessionFactory.openSession(); 
+		
+		List<User> Users = sqlSession.selectList("user.findUserByUsername", "五");
+
+		return Users;
+		//return sqlSession.selectList("user.findUsername", "琪");
+	}
+	
+}
