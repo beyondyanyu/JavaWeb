@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 命名空间：order.findUserById 
 -->
 
-<mapper namespace="user">
+<mapper namespace="com.pdsu.mybatis.mapper.UserMapper">
 	
 	<!-- 
 	resultType:返回值
@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 通过ID查询一个用户 -->
-	<select id="findUserById" parameterType="Integer" resultType="com.pdsu.mybatis.pojo.User">
+	<select id="findUserById" parameterType="Integer" resultType="user">
 		select * from user where id= #{sq}
 	</select>
 	
