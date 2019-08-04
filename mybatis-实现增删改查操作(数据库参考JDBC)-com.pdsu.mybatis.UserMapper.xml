@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
+<!-- 
+命名空间：user.findUserById
+命名空间：order.findUserById 
+-->
+
+<mapper namespace="com.pdsu.mybatis.mapper.UserMapper">
+	
+	<!-- 
+	resultType:返回值
+	parameterType:输入参数 
+	-->
+	
+	
+	<!-- 通过ID查询一个用户 -->
+	<select id="findUserById" parameterType="Integer" resultType="user">
+		select * from user where id= #{sq}
+	</select>
+	
+	<!-- 
+	#{} === select * from user where username=     表示占位符？   sq可以随意替代
+		=== select * from user where username= '思琪'
+	
+	${} === select * from user where username like '%${value}%'  表示字符串拼接  value不可以随意替代
+		
+		=== select * from user where username like '%琪%' 			sql 模糊语句查询
+		=== select * from user where username like "%"'琪%'"%" 		sql 模糊语句查询
+		
+		=== select * from user where username like "%"#{sq}"%" 
+	-->
+	
+	
+	<!-- 根据用户名称模糊查询用户列表 -->
+	<select id="findUserByUsername" parameterType="String" resultType="com.pdsu.mybatis.pojo.User">
+		select * from user where username like '%${value}%'
+	</select>
+	
+	<!-- 添加用户 -->
+	<insert id="insertUser" parameterType="com.pdsu.mybatis.pojo.User">
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER" >
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into user(username,birthday,address,sex) values (#{username},#{birthday},#{address},#{sex})
+	</insert>
+	
+	
+	<!-- 更新用户 -->
+	<update id="updateUserById" parameterType="com.pdsu.mybatis.pojo.User">
+		update user set username = #{username},sex = #{sex},birthday = #{birthday},address = #{address}
+		where id = #{id}
+	</update>	
+	
+	<!-- 删除用户 -->
+	<delete id="deleteUserById" parameterType="Integer" >
+		delete from user where id = #{sq}
+	</delete>
+
+</mapper>
