@@ -1,6 +1,9 @@
 package com.pdsu.mybatis.junit;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -31,8 +34,127 @@ public class MybatisFirstTest {
 		这里的user是与sqlmap文件夹里面的User.xml的namespace一致
 		findUserById是与sqlmap文件夹里面的User.xml的id一致
 		*/
-		
-		
+
 		System.out.println(User);
+		
 	}
+		
+		
+		
+		
+	//根据用户名称模糊查询用户列表
+	@Test
+	public void testfindUserByUsername() throws Exception {
+		//加载核心配置文件，加载要使用IO流进行读取
+		String resource = "sqlMapConfig.xml";
+		InputStream in = Resources.getResourceAsStream(resource);
+		
+		//创建SqlSessionFactory
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+		//SqlSessionFactoryBuilder这是一个实现类需要new一下
+		
+		//创建SQLSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//执行sql语句
+		List<User> Users = sqlSession.selectList("user.findUserByUsername", "五");
+		/*
+		这里的user是与sqlmap文件夹里面的User.xml的namespace一致
+		findUserById是与sqlmap文件夹里面的User.xml的id一致
+		*/
+		for (User user : Users) {
+			System.out.println(user);
+		}
+		
+	}
+	
+	
+	//添加用户
+	@Test
+	public void testInsertUser() throws Exception {
+		//加载核心配置文件，加载要使用IO流进行读取
+		String resource = "sqlMapConfig.xml";
+		InputStream in = Resources.getResourceAsStream(resource);
+		
+		//创建SqlSessionFactory
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+		//SqlSessionFactoryBuilder这是一个实现类需要new一下
+		
+		//创建SQLSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//执行sql语句
+		User user = new User();
+		user.setUsername("谚语");
+		Date date=new Date();
+		String string ="1999-05-22";
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+		date = dateFormat.parse(string);
+		user.setBirthday(date);
+		user.setAddress("河南省安阳县水冶镇南关村");
+		user.setSex("男");
+		int i = sqlSession.insert("user.insertUser",user);
+		sqlSession.commit();//需要提交事务
+		
+		System.out.println(user.getId());
+	}
+	
+	//更新用户
+	@Test
+	public void testUpdateUserById() throws Exception {
+		//加载核心配置文件，加载要使用IO流进行读取
+		String resource = "sqlMapConfig.xml";
+		InputStream in = Resources.getResourceAsStream(resource);
+		
+		//创建SqlSessionFactory
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+		//SqlSessionFactoryBuilder这是一个实现类需要new一下
+		
+		//创建SQLSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//执行sql语句
+		User user = new User();
+		user.setId(30);
+		user.setUsername("王思琪");
+		
+		Date date=new Date();//需要new一个Date对象
+		String string ="1998-10-14";//输入想要添加的生日
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //设置日期格式  yyyy-MM-dd-HH-mm-ss这个是完整的
+		date = dateFormat.parse(string);//将字符串转换成date类型数据
+		user.setBirthday(date);//存入到user中即可
+		
+		user.setAddress("河南省安阳县水冶镇小东关");
+		user.setSex("女");
+		
+		int i = sqlSession.update("user.updateUserById",user);
+		
+		sqlSession.commit();//需要提交事务
+	}
+	
+	
+	
+	//删除用户
+	@Test
+	public void testDeleteUserById() throws Exception {
+		//加载核心配置文件，加载要使用IO流进行读取
+		String resource = "sqlMapConfig.xml";
+		InputStream in = Resources.getResourceAsStream(resource);
+		
+		//创建SqlSessionFactory
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+		//SqlSessionFactoryBuilder这是一个实现类需要new一下
+		
+		//创建SQLSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//执行sql语句
+		
+		sqlSession.delete("user.deleteUserById", 28);
+		
+		sqlSession.commit();//需要提交事务
+	}
+	
+	
 }
+	
