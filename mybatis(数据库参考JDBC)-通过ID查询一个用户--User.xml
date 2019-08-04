@@ -39,6 +39,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user where username like '%${value}%'
 	</select>
 	
+	<!-- 添加用户 -->
+	<insert id="insertUser" parameterType="com.pdsu.mybatis.pojo.User">
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER" >
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into user(username,birthday,address,sex) values (#{username},#{birthday},#{address},#{sex})
+	</insert>
+	
+	
+	<!-- 更新用户 -->
+	<update id="updateUserById" parameterType="com.pdsu.mybatis.pojo.User">
+		update user set username = #{username},sex = #{sex},birthday = #{birthday},address = #{address}
+		where id = #{id}
+	</update>	
+	
+	<!-- 删除用户 -->
+	<delete id="deleteUserById" parameterType="Integer" >
+		delete from user where id = #{sq}
+	</delete>
 	
 	
 </mapper>
