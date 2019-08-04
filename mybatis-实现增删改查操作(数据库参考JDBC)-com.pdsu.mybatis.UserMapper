@@ -1,0 +1,19 @@
+package com.pdsu.mybatis.mapper;
+
+import java.util.List;
+
+import com.pdsu.mybatis.pojo.User;
+
+
+public interface UserMapper {
+	/*
+	 遵循四个原则
+	对于：public User findUserById(Integer id);
+	接口   方法名 == User.xml中id名 === findUserById
+	返回值类型 与 Mapper.xml文件中返回值类型（resultType）要一致 === User === com.pdsu.mybatis.pojo.User
+	方法的入参类型 与 Mapper.xml中入参类型（parameterType）要一致 === Integer id
+	命名空间绑定此接口<mapper namespace="com.pdsu.mybatis.mapper.UserMapper">,User.xml中的路径为该接口全路径
+	*/
+	public User findUserById(Integer id);
+		
+}
