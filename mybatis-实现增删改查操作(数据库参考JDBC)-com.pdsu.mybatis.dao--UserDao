@@ -1,0 +1,11 @@
+package com.pdsu.mybatis.dao;
+
+import com.pdsu.mybatis.pojo.User;
+/*
+ * 接口
+ * */
+public interface UserDao {
+	//通过用户ID查询一个用户
+	public User selectUserById(Integer id);
+		
+}
