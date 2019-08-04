@@ -124,7 +124,7 @@ public class MybatisFirstTest {
 		date = dateFormat.parse(string);//将字符串转换成date类型数据
 		user.setBirthday(date);//存入到user中即可
 		
-		user.setAddress("河南省安阳县水冶镇小东关");
+		user.setAddress("河南省安阳县");
 		user.setSex("女");
 		
 		int i = sqlSession.update("user.updateUserById",user);
